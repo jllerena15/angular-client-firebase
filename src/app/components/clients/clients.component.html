@@ -1,0 +1,37 @@
+<h1>Clients</h1>
+
+<div class="alert alert-success" *ngIf="message">{{message}}</div>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Edad</th>
+        <th>Fecha Nacimiento</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients">
+        <td>{{client.name}}</td>
+        <td>{{client.lastname}}</td>
+        <td>{{client.age}}</td>
+        <td>{{client.birthdate | date:'dd-MM-yyyy'}}</td>
+        <td>
+          <button (click)="updateClient($event, client)" class="btn btn-success btn-sm"><i class="fa fa-pencil-square-o"></i></button>
+        </td>
+        <td>
+          <button (click)="deleteClient($event, client)" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row">
+    <button (click)="addClient()" class="btn btn-success btn-sm"><i class="fa fa-plus">&nbsp;Add</i></button>
+  </div>
+
+</div>

@@ -1,0 +1,41 @@
+<h1>Client</h1>
+
+<div class="container">
+
+  <div class="alert alert-warning" *ngIf="clientForm.dirty && clientForm.invalid">Ingrese valores correctos</div>
+  <!-- <div class="alert alert-warning" *ngIf="clientForm.dirty && targetDate.invalid">Enter valid Target Date</div>
+  <div class="alert alert-warning" *ngIf="clientForm.dirty && description.invalid">Enter at least 5 characters in Description</div> -->
+
+  <form (ngSubmit)="!clientForm.invalid && saveClient()" #clientForm="ngForm">
+    <fieldset class="form-group">
+      <label>Nombre</label>
+      <input type="text" #name="ngModel"
+      [(ngModel)]="client.name" class="form-control" name="name" 
+      required="required">
+    </fieldset>
+
+    <fieldset class="form-group">
+      <label>Apellido</label>
+      <input type="text" #lastname="ngModel"
+      [(ngModel)]="client.lastname" class="form-control" name="lastname" 
+      required="required">
+    </fieldset>
+
+    <fieldset class="form-group">
+      <label>Edad</label>
+      <input type="number" #age="ngModel"
+      [(ngModel)]="client.age" class="form-control" name="age" 
+      required="required" min="0" max="130" step="1">
+    </fieldset>
+
+    <fieldset class="form-group">
+      <label>Fecha Nacimiento</label>
+      <input type="date" #birthdate="ngModel"
+        [ngModel]="client.birthdate | date:'yyyy-MM-dd'" (ngModelChange)="client.birthdate = $event"
+        class="form-control" name="birthdate" required="required">
+    </fieldset>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+  </form>
+
+</div>
