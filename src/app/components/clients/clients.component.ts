@@ -10,7 +10,9 @@ import { Client } from 'src/app/models/client';
 })
 export class ClientsComponent implements OnInit {
 
-  clients = [];
+  clients: Client[];
+  edadPromedio: number;
+  edadDesvEstandar: number;
 
   constructor(
     private clientService: ClientService,
@@ -21,6 +23,14 @@ export class ClientsComponent implements OnInit {
     this.clientService.getClients().subscribe(
       clients => {
         this.clients = clients;
+        let sumaEdad = 0;
+        let sumEdadExp = 0;
+
+        this.clients.forEach(element => { sumaEdad += element.age;});
+        this.edadPromedio = sumaEdad / this.clients.length;
+
+        this.clients.forEach(element => { sumEdadExp += Math.pow((element.age - this.edadPromedio), 2); });
+        this.edadDesvEstandar = Math.round(Math.sqrt(sumEdadExp / this.clients.length) * 100) / 100;
       }
     );
   }
